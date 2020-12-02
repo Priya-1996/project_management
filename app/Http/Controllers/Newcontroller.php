@@ -10,6 +10,13 @@ class Newcontroller extends Controller
 	protected $namespace='App\Http\Controllers';
     function registration(Request $req)
     {
+    	$req->validate([
+    		'fname'=> 'required',
+    		'lname'=> 'required',
+    		'email'=> 'required',
+    		'password'=> 'required',
+    		'about'=> 'required'
+    	]);
     	$registration= new Newmodel();
     	$registration->fname=$req->input('fname');
     	$registration->lname=$req->input('lname');

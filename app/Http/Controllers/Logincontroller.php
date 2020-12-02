@@ -11,6 +11,10 @@ class Logincontroller extends Controller
     protected $namespace='App\Http\Controllers';
     function login(Request $req)
     {
+    	// $req->validate([
+    	// 	'email'=> 'required',
+    	// 	'password'=> 'required',
+    	// ]);
     	$login=new Newmodel();
     	$email=$req->email;
     	$password=$req->password;

@@ -16,13 +16,32 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::view('first','user_registration');
+
+Route::get('/first',function(){
+	return view('user_registration');
+});
 Route::post('/registration','App\Http\Controllers\Newcontroller@registration');
-Route::view('login','login');
-Route::view('display','display');
+
+Route::get('/login',function(){
+	return view('login');
+});
+
+Route::get('/display',function(){
+	return view('display');
+});
+
 Route::post('/login','App\Http\Controllers\Logincontroller@login');
-Route::view('display','display');
+
+Route::get('/display',function(){
+	return view('display');
+});
+
 Route::post('/imageupload','App\Http\Controllers\Imgcontroller@imgupload');
+Route::get('/imageupload','App\Http\Controllers\Imgcontroller@getimgupload');
+
+Route::get('/imagetable',function(){
+	return view('imagetable');
+});
 
 Route::get('/logout',function(){
 	if(session()->has('user_id'))

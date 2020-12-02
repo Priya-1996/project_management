@@ -4,7 +4,7 @@
 	<title>display page</title>
 </head>
 <body>
-<h3><center>WELCOME TO DISPLAY PAGE</center></h3>
+<h3><center>You have successfully logged in</center></h3>
 <pre>
 	
 
@@ -13,6 +13,7 @@
 <form method="post" action="/imageupload" enctype="multipart/form-data">
 	<center>
 	@csrf
+	<input type="text" name="id" value="{{ session('user_id') }}">
 	<b>Upload images:</b><br>
 	<br>
 	<input type="file" name="image[]" multiple><br>

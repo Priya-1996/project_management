@@ -23,14 +23,20 @@ class Imgcontroller extends Controller
 
 
     	        $file= new Uploadmodel();
-                $file->image_name = implode(',',$files);
+                $file->image_name = $files[];
                 $file->save();
                 $data=Uploadmodel::all();
-                echo "Image uploaded";
-    	        //return view('imagetable',['data'=>$data]);
+                print_r($data);
+                exit();
+                //echo "Image uploaded";
+    	        return view('imagetable',['data'=>$data]);
     	    
 
     	}
+    	// function getimgupload(Request $r)
+    	// {
+    	// 	die('Hi');
+    	// }
     	
     	
     }
