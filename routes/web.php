@@ -61,3 +61,20 @@ Route::get('/logout',function(){
 	return redirect('login');
 });
 
+Route::get('/adminlogin',function(){
+	return view('adminlogin');
+});
+
+Route::get('/admin','App\Http\Controllers\AdminCon@login');
+
+Route::get('/admindisplay',function(){
+	$id=session('id');
+	$data=DB::table('user_registration')->get();
+	return view('admindisplay',['data'=>$data]);
+});
+
+Route::get('/dashboard',function(){
+	return view('dashboard');
+});
+
+Route::get('datadelete/{id}','App\Http\Controllers\AdminCon@datadelete')->name('data.delete');
