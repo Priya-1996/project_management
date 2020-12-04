@@ -56,7 +56,7 @@ Route::get('imagedelete/{id}','App\Http\Controllers\Imgcontroller@imgdelete')->n
 Route::get('/logout',function(){
 	if(session()->has('user_id'))
 	{
-		session()->pull('user_id');
+		session()->forget('user_id');
 	}
 	return redirect('login');
 });
@@ -67,7 +67,10 @@ Route::get('/adminlogin',function(){
 
 Route::get('/admin','App\Http\Controllers\AdminCon@login');
 
-Route::get('/admindisplay',function(){
+Route::group(['middleware'=>['adminAuth']],function(){
+	Route::view('dashboard','dashboard');
+
+	Route::get('/admindisplay',function(){
 	$id=session('id');
 	$data=DB::table('user_registration')->get();
 	return view('admindisplay',['data'=>$data]);
@@ -77,4 +80,22 @@ Route::get('/dashboard',function(){
 	return view('dashboard');
 });
 
+Route::get('dataedit/{id}','App\Http\Controllers\AdminCon@dataedit')->name('data.edit');
+
+Route::post('/dataupdate','App\Http\Controllers\AdminCon@dataupdate');
+
 Route::get('datadelete/{id}','App\Http\Controllers\AdminCon@datadelete')->name('data.delete');
+
+Route::get('/adminlogout',function(){
+	if(session()->has('user_id'))
+	{
+		session()->forget('user_id');
+	}
+	return redirect('adminlogin');
+});
+});
+
+
+
+
+

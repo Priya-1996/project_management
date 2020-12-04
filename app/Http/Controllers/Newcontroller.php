@@ -21,7 +21,7 @@ class Newcontroller extends Controller
     	$registration->fname=$req->input('fname');
     	$registration->lname=$req->input('lname');
     	$registration->email=$req->input('email');
-    	$registration->password=$req->input('password');
+    	$registration->password=md5($req->input('password'));
     	$registration->about=$req->input('about');
     	$registration->save();
     	return redirect('login');

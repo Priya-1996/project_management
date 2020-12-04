@@ -26,6 +26,6 @@
 	
 
 </pre>
-<center><button><a href="http://127.0.0.1:8000/first"> LOGOUT</a></button></center>
+<center><button><a href="http://127.0.0.1:8000/logout"> LOGOUT</a></button></center>
 </body>
 </html>

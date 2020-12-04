@@ -17,7 +17,7 @@ class Logincontroller extends Controller
     	// ]);
     	$login=new Newmodel();
     	$email=$req->email;
-    	$password=$req->password;
+    	$password=md5($req->password);
     	$session=Newmodel::where('email',$email)->where('password',$password)->get();
     	if(count($session)>0)
     	{
