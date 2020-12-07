@@ -96,6 +96,10 @@ Route::get('/adminlogout',function(){
 });
 
 
+Route::get('/emailsend',function(){
+	return view('emailsend');
+});
 
+Route::post('/mail','App\Http\Controllers\EmailCon@send');
 
 

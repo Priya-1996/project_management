@@ -57,4 +57,8 @@ class AdminCon extends Controller
 
     	return redirect('admindisplay');
     }
+    // function gettabledata()
+    // {
+    //     $data=
+    // }
 }
