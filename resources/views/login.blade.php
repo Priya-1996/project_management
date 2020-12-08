@@ -5,7 +5,7 @@
 
 </head>
 <body>
-	<h3><center>Login here with correcr email id and password</center></h3>
+	<h3><center>Login here with correct email id and password</center></h3>
 <form method="post" action="http://127.0.0.1:8000/login" onsubmit="return f()">
 	@csrf
 	<table border="1" cellpadding="10" cellspacing="0" style="margin: auto;">

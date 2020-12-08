@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\AdminModel;
 use App\Models\Newmodel;
 use Illuminate\Support\Facades\DB;
+use DataTables;
 
 class AdminCon extends Controller
 {
@@ -57,8 +58,48 @@ class AdminCon extends Controller
 
     	return redirect('admindisplay');
     }
-    // function gettabledata()
-    // {
-    //     $data=
-    // }
+    function gettabledata()
+    {
+        // $data=Newmodel::select('*');
+        // $data_arr=array();
+        // foreach($data as $d)
+        // {
+        //     $id=$d->id;
+        //     $fname=$d->fname;
+        //     $lname=$d->lname;
+        //     $email=$d->email;
+        //     $password=$d->password;
+        //     $about=$d->about;
+
+        //     $data_arr[]=array(
+        //         "id"=>$id,
+        //         "fname"=>$fname,
+        //         "lname"=>$lname,
+        //         "email"=>$email,
+        //         "password"=>$password,
+        //         "about"=>$about
+        //     );
+        // }
+        // $response=array(
+        //     //"draw"=>intval($draw),
+        //     //"itotalRecords"=>$totalRecords,
+        //     "alldata"=>$data_arr
+        // );
+        // echo json_encode($response);
+        // exit;
+
+        
+            $data = Newmodel::get();
+            return Datatables::of($data)
+                ->addColumn('action', function($row){
+                    $actionBtn = '<button><a href="'. url('/dataedit/'.$row->id) .'">Edit</a></button> <button><a href="'. url('/datadelete/'.$row->id) .'">Delete</a></button>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        
+
+    }
+
+
 }

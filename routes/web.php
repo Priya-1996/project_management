@@ -22,7 +22,11 @@ Route::get('/first',function(){
 });
 Route::post('/registration','App\Http\Controllers\Newcontroller@registration');
 
-Route::get('/login',function(){
+// Route::get('/loginuser/{id}',function(){
+// 	return view('login');
+// });
+
+Route::get('/loginuser',function(){
 	return view('login');
 });
 
@@ -79,6 +83,8 @@ Route::group(['middleware'=>['adminAuth']],function(){
 Route::get('/dashboard',function(){
 	return view('dashboard');
 });
+
+Route::get('/gettabledata','App\Http\Controllers\AdminCon@gettabledata')->name("get.tabledata");
 
 Route::get('dataedit/{id}','App\Http\Controllers\AdminCon@dataedit')->name('data.edit');
 

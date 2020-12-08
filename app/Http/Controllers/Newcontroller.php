@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Newmodel;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendingEmail;
 
 class Newcontroller extends Controller
 {
@@ -13,7 +15,7 @@ class Newcontroller extends Controller
     	$req->validate([
     		'fname'=> 'required',
     		'lname'=> 'required',
-    		'email'=> 'required',
+    		'email'=> 'required|unique:users',
     		'password'=> 'required',
     		'about'=> 'required'
     	]);
@@ -24,7 +26,20 @@ class Newcontroller extends Controller
     	$registration->password=md5($req->input('password'));
     	$registration->about=$req->input('about');
     	$registration->save();
-    	return redirect('login');
+        //$email=$req->email;
+    	return redirect('loginuser');
+
+        // $userid=Newmodel::select('id')->where('email',$req->email)->get();
+        // $data = [
+        //     'title' => 'Mail for customer support' ,
+        //     'body' => 'Thanks to register.' ,
+        //     'dataid' => $userid
+        // ];
+
+        
+
+        // Mail::to('gitahazra25@gmail.com')->send(new SendingEmail($data));
+        // return "Email Sent!";
     }
 }
 ?>

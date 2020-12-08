@@ -3,14 +3,16 @@
 <head>
 	<title>user data table</title>
 
-	<script
-  src="http://code.jquery.com/jquery-3.5.1.js"
+	
+  <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
   crossorigin="anonymous"></script>
-
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
   
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>   
 
 
 
@@ -22,9 +24,9 @@
 		
 
 	</pre>
-<table border="1" style="margin: auto; background-color: lightyellow;" cellspacing="0" id="table_id" class="display">
+<table class="datatable table table-bordered table-striped" id="table_data">
 	<thead>
-		<th>SL No.</th>
+		<th>ID</th>
 	    <th>First Name</th>
 	    <th>Last Name</th>
 	    <th>Email</th>
@@ -33,7 +35,7 @@
 	    <th>Action</th>
 	</thead>
 	
-    <tbody>
+    <!-- <tbody>
 	<?php
 	$sl=1;
 	foreach($data as $row){
@@ -56,12 +58,30 @@
 	$sl++;
     }
 	?>
-</tbody>
+</tbody> -->
 </table>
 <script type="text/javascript">
 
 	$(document).ready( function(){
-    $('#table_id').DataTable({
+    $('#table_data').DataTable({
+    	    processing: true,
+            serverSide: true,
+            ajax: "{{ route('get.tabledata') }}",
+            "method":"GET",
+            columns: [
+            {data: 'id', name: 'id'},
+            {data: 'fname', name: 'fname'},
+            {data: 'lname', name: 'lname'},
+            {data: 'email', name: 'email'},
+            {data: 'password', name: 'password'},
+            {data: 'about', name: 'about'},
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: true, 
+                searchable: true
+            },
+        ]          
     });
     });
 </script>
