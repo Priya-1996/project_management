@@ -17,16 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/first',function(){
-	return view('user_registration');
-});
+Route::get('/user_registration','App\Http\Controllers\Newcontroller@registration')->name('user.reg');
 Route::post('/registration','App\Http\Controllers\Newcontroller@registration');
 
 // Route::get('/loginuser/{id}',function(){
 // 	return view('login');
 // });
 
-Route::get('/loginuser',function(){
+Route::get('/userlogin',function(){
 	return view('login');
 });
 
@@ -108,4 +106,12 @@ Route::get('/emailsend',function(){
 
 Route::post('/mail','App\Http\Controllers\EmailCon@send');
 
+
+
+//<---------Restaurant Portal Routes----------->
+Route::get('/restaurant','App\Http\Controllers\RestaurantCon@index');
+
+Route::get('/reg_type','App\Http\Controllers\RestaurantCon@registration');
+
+Route::get('/restaurent_owner_reg','App\Http\Controllers\RestaurantCon@restaurant_owner');
 

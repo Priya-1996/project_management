@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Newmodel;
+use App\Models\Signupmodel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendingEmail;
 
@@ -12,7 +12,6 @@ class Newcontroller extends Controller
 	protected $namespace='App\Http\Controllers';
     function registration(Request $req)
     {
-        return view('user_registration');
     	
     	$registration= new Newmodel();
     	$registration->fname=$req->input('fname');

@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h3><center>Login here with correct email id and password</center></h3>
-<form method="post" action="http://127.0.0.1:8000/login" onsubmit="return f()">
+<form method="post" action="http://127.0.0.1:8000/login" onsubmit="return loginvalidation()">
 	@csrf
 	<table border="1" cellpadding="10" cellspacing="0" style="margin: auto;">
 		<tr>
@@ -28,7 +28,7 @@
 </form>
 <center><span id="success"></span></center>
 <script type="text/javascript">
-	function f()
+	function loginvalidation()
 	{
 		var email=document.getElementById("mail").value;
 		var password=document.getElementById("pass").value;
