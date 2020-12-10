@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Signupmodel extends Model
+class Customermodel extends Model
 {
     use HasFactory;
-    public $table='user_registration';
+    public $table='restaurant_owner';
     public $timestamps=false;
 }
-?>

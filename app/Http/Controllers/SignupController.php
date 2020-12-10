@@ -7,21 +7,28 @@ use App\Models\Signupmodel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendingEmail;
 
-class Newcontroller extends Controller
+class SignupController extends Controller
 {
 	protected $namespace='App\Http\Controllers';
+    function index()
+    {
+        return view('user_registration');
+    }
     function registration(Request $req)
     {
     	
-    	$registration= new Newmodel();
+    	$registration= new Signupmodel();
     	$registration->fname=$req->input('fname');
     	$registration->lname=$req->input('lname');
     	$registration->email=$req->input('email');
     	$registration->password=md5($req->input('password'));
     	$registration->about=$req->input('about');
+        $registration->latitude=$req->input('latitude');
+        $registration->longitude=$req->input('longitude');
     	$registration->save();
         //$email=$req->email;
-    	return redirect('loginuser');
+        //echo "data saved";
+    	return redirect('userlogin');
 
         // $userid=Newmodel::select('id')->where('email',$req->email)->get();
         // $data = [

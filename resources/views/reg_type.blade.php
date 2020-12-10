@@ -63,7 +63,9 @@
 
         });
 </script>
-
+<div>
+    <center><h1 style="background-color: green;">{{ Session::get('msg') }}</h1></center>
+</div>
 </body>
 
 <!-- <footer>

@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user_registration','App\Http\Controllers\Newcontroller@registration')->name('user.reg');
-Route::post('/registration','App\Http\Controllers\Newcontroller@registration');
+Route::get('/user_registration','App\Http\Controllers\SignupController@index')->name('user.reg');
+Route::post('/registration','App\Http\Controllers\SignupController@registration');
 
 // Route::get('/loginuser/{id}',function(){
 // 	return view('login');
@@ -115,3 +115,4 @@ Route::get('/reg_type','App\Http\Controllers\RestaurantCon@registration');
 
 Route::get('/restaurent_owner_reg','App\Http\Controllers\RestaurantCon@restaurant_owner');
 
+Route::get('/resowner_reg','App\Http\Controllers\RestaurantCon@res_reg');

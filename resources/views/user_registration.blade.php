@@ -4,14 +4,14 @@
 	<title>New Registration</title>
 	<style type="text/css">
         #map {
-            width: 50%;
-            height: 300px;
+            width: 100%;
+            height: 400px;
             margin: auto;
         }
     </style>
 </head>
 <body>
-	<h3><center>USER REGISTRATION PAGE</center></h3>
+	<h3><center>CUSTOMER REGISTRATION PAGE</center></h3>
 	<pre>
 		
 
@@ -50,13 +50,14 @@
 		</td>
 		</tr>
 		<tr>
-			<center><td colspan="2">
+			<td>Address</td>
+			<td>
 			<div id="map"></div>
-               <ul id="geoData">
-               <li>Latitude: <span id="lat-span"></span></li>
-               <li>Longitude: <span id="lon-span"></span></li>
+               <ul hidden id="geoData">
+               <li>Latitude: <textarea id="lat-span" name="latitude"></textarea></li>
+               <li>Longitude: <textarea id="lon-span" name="longitude"></textarea></li>
                </ul>
-            </td></center>
+            </td>
 		</tr>
 		<tr>
 			<td colspan="2"><center><input type="submit" name="register" value="Register"></center></td>

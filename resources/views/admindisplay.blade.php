@@ -75,6 +75,8 @@
             {data: 'email', name: 'email'},
             {data: 'password', name: 'password'},
             {data: 'about', name: 'about'},
+            {data: 'latitude', name: 'latitude'},
+            {data: 'longitude', name: 'longitude'},
             {
                 data: 'action', 
                 name: 'action', 
