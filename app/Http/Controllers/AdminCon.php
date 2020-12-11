@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdminModel;
 use App\Models\Newmodel;
+use App\Models\Cuisinemodel;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 
@@ -99,6 +100,40 @@ class AdminCon extends Controller
                 ->make(true);
         
 
+    }
+
+    function cuisine()
+    {
+        return view('add_cuisine');
+    }
+
+    function addcuisine(Request $req)
+    {
+        $data = new Cuisinemodel;
+        $data->cuisine=$req->input('cuisine');
+        $data->save();
+        $req->session()->flash('msg','Cuisine added successfully');
+        return redirect('cuisine');
+    }
+    function modify_cuisine(Request $req)
+    {
+        $table=Cuisinemodel::select('*')->get();
+        return view('modify_cuisine',['table'=>$table]);
+    }
+
+    // function disp_cuisine(Request $req)
+    // {
+    //     $cuisine=$req->cuisine;
+    //     $data=Cuisinemodel::where('cuisine',$cuisine)->get();
+    //     return redirect('restaurent_owner_reg',['data'=>$data]);
+    // }
+
+    function cuisinedelete($id,Request $req)
+    {
+        $data=Cuisinemodel::find($id);
+        $data->delete();
+        $req->session()->flash('msg','Cuisine deleted successfully');
+        return redirect('modify');
     }
 
 

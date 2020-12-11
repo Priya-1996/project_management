@@ -16,23 +16,21 @@
   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
   crossorigin="anonymous"></script>
   <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
-  <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
   
 
 </head>
 <body>
 <div class="container" style="margin: auto;">
   <h2>Fill the details below to register</h2>
-  <form method="get" action="http://127.0.0.1:8000/resowner_reg" style="margin: auto;" enctype="multipart/form-data" onsubmit="return validation()">
+  <form method="post" action="/resowner_reg" style="margin: auto;" enctype="multipart/form-data" onsubmit="return validation()">
   	@csrf
     <div class="form-group">
       <label for="image">Restaurant Image:</label>
-      <input type="file" class="form-control" id="image" placeholder="Enter image" name="image" required><span id="i"></span>
+      <input type="file" class="form-control" id="image" placeholder="Enter image" name="image"><span id="i"></span>
     </div>
     <div>
     <label for="name">Restaurant Name:</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required><span id="n"></span>
+      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name"><span id="n"></span>
     </div>
     <div class="form-group">
 	<div class="panel">
@@ -40,37 +38,38 @@
 			<label class="panel-title">Address</label> 
 		</div>
 		<div class="panel-body">
-			<input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text" class="form-control" name="add" required>
+			<input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text" class="form-control" name="add">
+			<span id="add"></span>
 			<br>
 			<div id="address">
 				<div class="row">
 					<div class="col-md-6">
 						<label class="control-label">Street address</label>
-						<input class="form-control" id="street_number" name="st_add" disabled="true">
+						<input class="form-control" id="street_number" name="st_add" disabled="true"><span id="street_add"></span>
 					</div>
 					<div class="col-md-6">
-						<label class="control-label">Route</label>
-						<input class="form-control" id="route" name="route" disabled="true">
+						<label class="control-label">Street Number</label>
+						<input class="form-control" id="route" name="route" disabled="true"><span id="street_no"></span>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<label class="control-label">City</label>
-						<input class="form-control field" id="locality" name="city" disabled="true">
+						<input class="form-control field" id="locality" name="city" disabled="true"><span id="city"></span>
 					</div>
 					<div class="col-md-6"> 
 						<label class="control-label">State</label>
-						<input class="form-control" id="administrative_area_level_1" name="state" disabled="true">
+						<input class="form-control" id="administrative_area_level_1" name="state" disabled="true"><span id="state"></span>
 					</div>
 				</div>
 				<div class="row">
 					 <div class="col-md-6">
 						<label class="control-label">Zip code</label>
-						<input class="form-control" id="postal_code" name="zip" disabled="true">
+						<input class="form-control" id="postal_code" name="zip" disabled="true"><span id="zip"></span>
 					 </div>
 					 <div class="col-md-6">
 						<label class="control-label">Country</label>
-						<input class="form-control" id="country" name="country" disabled="true">
+						<input class="form-control" id="country" name="country" disabled="true"><span id="cntry"></span>
 					 </div>
 				</div>
 		   </div>
@@ -79,14 +78,20 @@
 </div>
     <div class="form-group">
       <label for="about">Add Description:</label>
-      <textarea id="myeditor" name="editor1" required></textarea><span id="ed"></span>
+      <textarea id="myeditor" name="editor1"></textarea><span id="ed"></span>
     </div>
-    <!-- <div class="form-group">
-      <label for="cuisine">Cuisine:</label><br>
-      <label><input type="checkbox" id="food" name="cuisine[]" value="indian">Indian</label>
-      <label><input type="checkbox" id="food" name="cuisine[]" value="chinese">Chinese</label>
-      <label><input type="checkbox" id="food" name="cuisine[]" value="italian">Italian</label><span id="c"></span>
-    </div> -->
+    <div class="form-group">
+    	<label for="cuisine">Cuisine:</label>
+    	<?php
+  use Illuminate\Support\Facades\DB;
+$data=DB::table('cuisine')->select('cuisine')->get();
+['data'=>$data];
+  ?>
+    	@foreach($data as $d)
+    	<input type="checkbox" id="food" name="cuisine[]" value="{{$d->cuisine}}">{{$d->cuisine}}
+    	@endforeach
+    	<span id="c"></span>
+    </div>
     <button type="submit" class="btn btn-success" name="submit">Submit</button>
   </form>
 </div>
@@ -151,16 +156,16 @@
           });
         }
       }
-	// $(document).ready(function(){
- //      $('#myeditor').summernote();
- //    });
 function validation()
 {
 	var image=document.getElementById("image").value;
 	var name=document.getElementById("name").value;
-	var address=document.getElementById("searchInput").value;
-	var latitude=document.getElementById("lat").value;
-	var longitude=document.getElementById("lon").value;
+	var address=document.getElementById("street_number").value;
+	var route=document.getElementById("route").value;
+	var city=document.getElementById("locality").value;
+	var state=document.getElementById("administrative_area_level_1").value;
+	var zip=document.getElementById("postal_code").value;
+	var country=document.getElementById("country").value;
 	var about=document.getElementById("myeditor").value;
 	var cuisine=document.getElementById("food").value;
 	    if(image=="")
@@ -177,8 +182,38 @@ function validation()
 		}
 		if(address=="")
 		{
-			document.getElementById("a").innerHTML="Please add your adreess";
-	    	document.getElementById("a").style.color="red";
+			document.getElementById("add").innerHTML="Please add your adreess";
+	    	document.getElementById("add").style.color="red";
+	    	return false;
+		}
+		if(route=="")
+		{
+			document.getElementById("street_no").innerHTML="Please add your adreess";
+	    	document.getElementById("street_no").style.color="red";
+	    	return false;
+		}
+		if(city=="")
+		{
+			document.getElementById("city").innerHTML="Please add your adreess";
+	    	document.getElementById("city").style.color="red";
+	    	return false;
+		}
+		if(state=="")
+		{
+			document.getElementById("state").innerHTML="Please add your adreess";
+	    	document.getElementById("state").style.color="red";
+	    	return false;
+		}
+		if(zip=="")
+		{
+			document.getElementById("zip").innerHTML="Please add your adreess";
+	    	document.getElementById("zip").style.color="red";
+	    	return false;
+		}
+		if(country=="")
+		{
+			document.getElementById("cntry").innerHTML="Please add your adreess";
+	    	document.getElementById("cntry").style.color="red";
 	    	return false;
 		}
 		if(about=="")
@@ -187,22 +222,17 @@ function validation()
 	    	document.getElementById("ed").style.color="red";
 	    	return false;
 		}
-		// if(cuisine=="")
-		// {
-		// 	document.getElementById("c").innerHTML="Please add at laest one cuisine";
-	 //    	document.getElementById("c").style.color="red";
-	 //    	return false;
-		// }
+		if(cuisine=="")
+		{
+			document.getElementById("c").innerHTML="Please add at laest one cuisine";
+	    	document.getElementById("c").style.color="red";
+	    	return false;
+		}
 
 }      
-
-
-
-    
+   
     CKEDITOR.replace('editor1');
     
-	
-
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO5aIIFAK1Z-5aL2e2Xw2DJY1lHqiW4Ec&libraries=places&callback=initAutocomplete" async defer></script>
 

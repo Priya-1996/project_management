@@ -37,34 +37,32 @@
         <h3 style="margin-left:50px;"><b>REGISTER BELOW</b></h3>
          <button style="margin-top: 50px;" class="btn btn-primary" id="customer_reg">For Customer</button>&nbsp;&nbsp;<button style="margin-top: 50px;" class="btn btn-primary" id="owner_reg">For Restaurant Owner</button>
 	</div>
-    <div id="customer"></div>
-    <div id="owner"></div>
+    <div id="customer">@include('user_registration')</div>
+    <div id="owner">@include('restaurant_owner')</div>
 
 <script type="text/javascript">
     $(document).ready(function(){
+        $("#customer").hide();
+        $("#owner").hide();
         $("#customer_reg").click(function(){
-            $.ajax({
-                url: "user_registration",
-                success: function (result){
-                     $("#customer").html(result);
-                } 
-            });
+            $("#customer").show();
 
             });
+        $("#customer_reg").dblclick(function(){
+            $("#customer").hide();
+        });
         $("#owner_reg").click(function(){
-            $.ajax({
-                url: "restaurent_owner_reg",
-                success: function (res){
-                     $("#owner").html(res);
-                } 
-            });
+            $("#owner").show();
 
             });
-
+            
+        $("#owner_reg").dblclick(function(){
+            $("#owner").hide();
+        });
         });
 </script>
 <div>
-    <center><h1 style="background-color: green;">{{ Session::get('msg') }}</h1></center>
+    <center><h3 style="background-color: green;">{{ Session::get('msg') }}</h3></center>
 </div>
 </body>
 

@@ -82,6 +82,14 @@ Route::get('/dashboard',function(){
 	return view('dashboard');
 });
 
+Route::get('cuisine','App\Http\Controllers\AdminCon@cuisine');
+
+Route::post('addcuisine','App\Http\Controllers\AdminCon@addcuisine');
+
+Route::get('modify','App\Http\Controllers\AdminCon@modify_cuisine');
+
+Route::get('cuisinedelete/{id}','App\Http\Controllers\AdminCon@cuisinedelete')->name('cuisine.delete');
+
 Route::get('/gettabledata','App\Http\Controllers\AdminCon@gettabledata')->name("get.tabledata");
 
 Route::get('dataedit/{id}','App\Http\Controllers\AdminCon@dataedit')->name('data.edit');
@@ -115,4 +123,5 @@ Route::get('/reg_type','App\Http\Controllers\RestaurantCon@registration');
 
 Route::get('/restaurent_owner_reg','App\Http\Controllers\RestaurantCon@restaurant_owner');
 
-Route::get('/resowner_reg','App\Http\Controllers\RestaurantCon@res_reg');
+Route::post('/resowner_reg','App\Http\Controllers\RestaurantCon@res_reg');
+
