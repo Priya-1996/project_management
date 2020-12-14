@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\DB;
 class Logincontroller extends Controller
 {
     protected $namespace='App\Http\Controllers';
+    function userlogin()
+    {
+        return view('login');
+    }
+    function display()
+    {
+        return view('display');
+    }
     function login(Request $req)
     {
     	// $req->validate([

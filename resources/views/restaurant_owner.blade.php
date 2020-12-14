@@ -21,7 +21,7 @@
 </head>
 <body>
 <div class="container" style="margin: auto;">
-  <h2>Fill the details below to register</h2>
+  <h2 style="color: red;">IF YOU ARE A RESTAURANT OWNER, REGISTER HERE </h2>
   <form method="post" action="/resowner_reg" style="margin: auto;" enctype="multipart/form-data" onsubmit="return validation()">
   	@csrf
     <div class="form-group">
@@ -106,6 +106,7 @@ $data=DB::table('cuisine')->select('cuisine')->get();
         country: 'long_name',
         postal_code: 'short_name'
       };
+
 
       function initAutocomplete() {
         // Create the autocomplete object, restricting the search to geographical
@@ -234,7 +235,9 @@ function validation()
     CKEDITOR.replace('editor1');
     
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO5aIIFAK1Z-5aL2e2Xw2DJY1lHqiW4Ec&libraries=places&callback=initAutocomplete" async defer></script>
+<footer>
+	@include('footer')
+</footer>
 
 </body>
 </html>

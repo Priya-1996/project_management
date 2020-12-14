@@ -52,7 +52,7 @@ class RestaurantCon extends Controller
         $registration->cuisine=implode(",",$req->input('cuisine'));
     	$registration->save();
     	$req->session()->flash('msg','You have successfully registered');
-    	return redirect('reg_type');
+    	return redirect('registration');
 
     }
 

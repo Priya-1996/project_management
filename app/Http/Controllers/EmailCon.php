@@ -8,6 +8,11 @@ use App\Mail\SendingEmail;
 
 class EmailCon extends Controller
 {
+    function emailsend()
+    {
+        return view('emailsend');
+    }
+
     function send()
     {
     	$data = [

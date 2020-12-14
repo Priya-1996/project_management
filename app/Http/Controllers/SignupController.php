@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Signupmodel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendingEmail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class SignupController extends Controller
 {
@@ -21,6 +23,8 @@ class SignupController extends Controller
     	$registration->fname=$req->input('fname');
     	$registration->lname=$req->input('lname');
     	$registration->email=$req->input('email');
+        $registration->active=0;
+        $registration->email_verification_code=Str::random(32);
     	$registration->password=md5($req->input('password'));
     	$registration->about=$req->input('about');
         $registration->latitude=$req->input('latitude');
@@ -28,19 +32,26 @@ class SignupController extends Controller
     	$registration->save();
         //$email=$req->email;
         //echo "data saved";
-    	return redirect('userlogin');
+    	//return redirect('userlogin');
 
         // $userid=Newmodel::select('id')->where('email',$req->email)->get();
-        // $data = [
-        //     'title' => 'Mail for customer support' ,
-        //     'body' => 'Thanks to register.' ,
-        //     'dataid' => $userid
-        // ];
+        $data = [
+            'title' => 'Mail for customer support' ,
+            'body' => 'Thanks to register.' ,
+            'email_verification_code'=>$registration->email_verification_code
+        ];
 
         
 
-        // Mail::to('gitahazra25@gmail.com')->send(new SendingEmail($data));
-        // return "Email Sent!";
+        Mail::to('deephazra018@gmail.com')->send(new SendingEmail($data));
+        $req->session()->flash('msg1','Please check your email to activate your account');
+        
+    }
+    public function verifyEmail($token,Request $req)
+    {
+        DB::table('user_registration')->where('email_verification_code',$token)->update(array('email_verified'=>1,'email_verification_code'=>''));
+        $req->session()->flash('msg','You are activated');
+        return redirect('/userlogin');
     }
 }
 ?>

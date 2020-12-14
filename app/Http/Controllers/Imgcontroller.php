@@ -26,6 +26,10 @@ class Imgcontroller extends Controller
     	    
 
     	}
+        function imagetable()
+        {
+            return view('imagetable');
+        }
     	// function getimgupload(Request $r)
     	// {
     	// 	die('Hi');

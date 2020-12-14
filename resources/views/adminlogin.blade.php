@@ -8,7 +8,7 @@
     	<pre>
     		
     	</pre>
-	<h3><center>ADMIN PANEL<br>Login here with correcr email id and password</center></h3>
+	<h3><center>ADMIN PANEL<br>Login here with correct email id and password</center></h3>
 	<pre>
 		
 	</pre>

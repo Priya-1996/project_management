@@ -17,35 +17,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//<------------USERs ROUTING---------------->
+
 Route::get('/user_registration','App\Http\Controllers\SignupController@index')->name('user.reg');
-Route::post('/registration','App\Http\Controllers\SignupController@registration');
+Route::post('/userregistration','App\Http\Controllers\SignupController@registration');
 
 // Route::get('/loginuser/{id}',function(){
 // 	return view('login');
 // });
 
-Route::get('/userlogin',function(){
-	return view('login');
-});
+Route::get('/verify/{token}', 'App\Http\Controllers\SignupController@verifyEmail')->name('verify');
 
-Route::get('/display',function(){
-	return view('display');
-});
+Route::get('/userlogin','App\Http\Controllers\Logincontroller@userlogin');
+
+Route::get('/display','App\Http\Controllers\Logincontroller@display');
 
 Route::post('/login','App\Http\Controllers\Logincontroller@login');
-
-Route::get('/display',function(){
-	return view('display');
-});
 
 Route::post('/imageupload','App\Http\Controllers\Imgcontroller@imgupload');
 
 //Route::get('/imageupload','App\Http\Controllers\Imgcontroller@getimgupload');
 
 
-Route::get('/imagetable',function(){
-	return view('imagetable');
-});
+Route::get('/imagetable','App\Http\Controllers\Imgcontroller@imagetable');
 
 Route::get('/imagetable',function(){
 	$id=session('user_id');
@@ -63,9 +57,9 @@ Route::get('/logout',function(){
 	return redirect('login');
 });
 
-Route::get('/adminlogin',function(){
-	return view('adminlogin');
-});
+//<------------------ADMIN PANEL ROUTING------------------->
+
+Route::get('/adminlogin','App\Http\Controllers\AdminCon@adminlogin');
 
 Route::get('/admin','App\Http\Controllers\AdminCon@login');
 
@@ -78,9 +72,7 @@ Route::group(['middleware'=>['adminAuth']],function(){
 	return view('admindisplay',['data'=>$data]);
 });
 
-Route::get('/dashboard',function(){
-	return view('dashboard');
-});
+Route::get('/dashboard','App\Http\Controllers\AdminCon@dashboard');
 
 Route::get('cuisine','App\Http\Controllers\AdminCon@cuisine');
 
@@ -91,6 +83,10 @@ Route::get('modify','App\Http\Controllers\AdminCon@modify_cuisine');
 Route::get('cuisinedelete/{id}','App\Http\Controllers\AdminCon@cuisinedelete')->name('cuisine.delete');
 
 Route::get('/gettabledata','App\Http\Controllers\AdminCon@gettabledata')->name("get.tabledata");
+
+Route::get('ownerlist','App\Http\Controllers\AdminCon@resowner_list');
+
+Route::get('/getownerdata','App\Http\Controllers\AdminCon@getownerdata')->name("get.ownertable");
 
 Route::get('dataedit/{id}','App\Http\Controllers\AdminCon@dataedit')->name('data.edit');
 
@@ -107,21 +103,27 @@ Route::get('/adminlogout',function(){
 });
 });
 
+//<-----------------------END--------------------------->
 
-Route::get('/emailsend',function(){
-	return view('emailsend');
-});
+//<---------------Email sending routes--------------->
+
+Route::get('/emailsend','App\Http\Controllers\EmailCon@emailsend');
 
 Route::post('/mail','App\Http\Controllers\EmailCon@send');
 
+//<--------------------END------------------------>
 
 
 //<---------Restaurant Portal Routes----------->
 Route::get('/restaurant','App\Http\Controllers\RestaurantCon@index');
 
-Route::get('/reg_type','App\Http\Controllers\RestaurantCon@registration');
+Route::get('/registration','App\Http\Controllers\RestaurantCon@registration');
 
 Route::get('/restaurent_owner_reg','App\Http\Controllers\RestaurantCon@restaurant_owner');
 
 Route::post('/resowner_reg','App\Http\Controllers\RestaurantCon@res_reg');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -6,12 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\AdminModel;
 use App\Models\Newmodel;
 use App\Models\Cuisinemodel;
+use App\Models\Customermodel;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 
 class AdminCon extends Controller
 {
     protected $namespace='App\Http\Controllers';
+    function adminlogin()
+    {
+        return view('adminlogin');
+    }
+
     function login(Request $req)
     {
     	$login=new AdminModel();
@@ -102,6 +108,11 @@ class AdminCon extends Controller
 
     }
 
+    function dashboard()
+    {
+        return view('dashboard');
+    }
+
     function cuisine()
     {
         return view('add_cuisine');
@@ -135,6 +146,13 @@ class AdminCon extends Controller
         $req->session()->flash('msg','Cuisine deleted successfully');
         return redirect('modify');
     }
+
+    function resowner_list()
+    {
+        return view('resownerlist');
+    }
+
+    
 
 
 }

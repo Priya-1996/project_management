@@ -9,22 +9,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 
-<header>
-	<div>
-	<nav class="navbar navbar-light justify-content-center" style="background-color: grey;">
-         <ul class="nav nav-pills">
-         <li class="nav-item">
-             <a class="nav-link active" href="#">Home</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" href="">Login</a>
-         <li class="nav-item">
-            <a class="nav-link" href="http://127.0.0.1:8000/reg_type">Registration</a>
-         </li>
-         </ul>
-    </nav>
-   </div>
-</header>
+@include('header')
 
 <body>
 	<div>

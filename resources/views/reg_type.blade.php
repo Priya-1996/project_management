@@ -15,22 +15,7 @@
   crossorigin="anonymous"></script>
 </head>
 
-<header>
-	<div>
-	<nav class="navbar navbar-light justify-content-center" style="background-color: grey;">
-         <ul class="nav nav-pills">
-         <li class="nav-item">
-             <a style="color: white;" class="nav-link" href="http://127.0.0.1:8000/restaurant">Home</a>
-         </li>
-         <li class="nav-item">
-            <a style="color: white;" class="nav-link" href="">Login</a>
-         <li class="nav-item">
-            <a style="color: white;" class="nav-link active" href="http://127.0.0.1:8000/reg_type">Registration</a>
-         </li>
-         </ul>
-    </nav>
-   </div>
-</header>
+@include('header')
 
 <body>
 	<div style="margin-top: 200px; margin-left: 500px;">
