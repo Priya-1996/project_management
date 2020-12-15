@@ -84,9 +84,9 @@ Route::get('cuisinedelete/{id}','App\Http\Controllers\AdminCon@cuisinedelete')->
 
 Route::get('/gettabledata','App\Http\Controllers\AdminCon@gettabledata')->name("get.tabledata");
 
-Route::get('ownerlist','App\Http\Controllers\AdminCon@resowner_list');
+//Route::get('ownerlist','App\Http\Controllers\AdminCon@resowner_list');
 
-Route::get('/getownerdata','App\Http\Controllers\AdminCon@getownerdata')->name("get.ownertable");
+Route::get('/ownerdata','App\Http\Controllers\AdminCon@getownerdata')->name('data.active');
 
 Route::get('dataedit/{id}','App\Http\Controllers\AdminCon@dataedit')->name('data.edit');
 
@@ -127,3 +127,15 @@ Route::post('/resowner_reg','App\Http\Controllers\RestaurantCon@res_reg');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/activate/{email}','App\Http\Controllers\RestaurantCon@active_owner')->name('data.active');
+
+Route::get('/owner','App\Http\Controllers\RestaurantCon@owner');
+
+Route::post('/ownerlogin','App\Http\Controllers\RestaurantCon@owner_login');
+
+Route::get('/ownerdashboard','App\Http\Controllers\RestaurantCon@owner_dashboard');
+
+Route::get('/food','App\Http\Controllers\RestaurantCon@managefood');
+
+Route::post('/addfood','App\Http\Controllers\RestaurantCon@addfood');

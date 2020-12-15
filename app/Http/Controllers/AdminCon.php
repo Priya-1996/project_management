@@ -147,12 +147,12 @@ class AdminCon extends Controller
         return redirect('modify');
     }
 
-    function resowner_list()
+    function getownerdata()
     {
-        return view('resownerlist');
+        $data = Customermodel::select('*')->get();
+        return view('resownerlist',['data'=>$data]);
     }
 
     
-
 
 }

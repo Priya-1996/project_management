@@ -1,76 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Restaurant owner list</title>
-
-	
-  <script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
-  
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>   
-
-
-
-	
+  <title>Restaurant Owner List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<center><h3><b>Restaurant Owner List</b></h3></center>
-	<pre>
-		
 
-	</pre>
-<table class="datatable table table-bordered table-striped" id="table_data">
-	<thead>
-		<th>ID</th>
-	    <th>Image</th>
-	    <th>Restaurant Name</th>
-	    <th>Address</th>
-	    <th>Street Address</th>
-	    <th>Street No.</th>
-	    <th>City</th>
-	    <th>State</th>
-	    <th>Zipcode</th>
-	    <th>Country</th>
-	    <th>Description</th>
-	    <th>Cuisine</th>
-	</thead>
-	
-</table>
-<script type="text/javascript">
+<div class="container" style="margin: auto;">
+  <center><h2 style="color: red;">Restaurant Owner List</h2></center>            
+  <table class="table">
+    <thead>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Restaurant Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Street Address</th>
+        <th>Street No.</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zipcode</th>
+        <th>Country</th>
+        <th>Description</th>
+        <th>Cuisine</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+      @foreach($data as $row)
+      <tr>
+        <td>{{ $row->id }}</td>
+        <td><img src="{{ asset('/images/'.$row->image) }}" height="100" width="100"></td>
+        <td>{{ $row->res_name }}</td>
+        <td>{{ $row->email }}</td>
+        <td>{{ $row->address }}</td>
+        <td>{{ $row->st_add }}</td>
+        <td>{{ $row->route }}</td>
+        <td>{{ $row->city }}</td>
+        <td>{{ $row->state }}</td>
+        <td>{{ $row->zip }}</td>
+        <td>{{ $row->country }}</td>
+        <td>{{ $row->about }}</td>
+        <td>{{ $row->cuisine }}</td>
+        <td><a href="{{ route('data.active',[$row->email]) }}" style="color: white;"><button class="btn btn-success">ACTIVATE</button></a></td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
 
-	$(document).ready( function(){
-    $('#table_data').DataTable({
-    	    processing: true,
-            serverSide: true,
-            ajax: "{{ route('get.ownertable') }}",
-            "method":"GET",
-            columns: [
-            {data: 'id', name: 'id'},
-            {data: 'image', name: 'image'},
-            {data: 'res_name', name: 'res_name'},
-            {data: 'address', name: 'address'},
-            {data: 'st_add', name: 'st_add'},
-            {data: 'route', name: 'route'},
-            {data: 'city', name: 'city'},
-            {data: 'state', name: 'state'},
-            {data: 'zip', name: 'zip'},
-            {data: 'country', name: 'country'},
-            {data: 'about', name: 'about'},
-            {data: 'cuisine', name: 'cuisine'},
-            {
-                data: 'action', 
-                name: 'action', 
-                orderable: true, 
-                searchable: true
-            },
-        ]          
-    });
-    });
-</script>
 </body>
 </html>

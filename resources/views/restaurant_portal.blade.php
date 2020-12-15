@@ -19,6 +19,12 @@
         </form>
 	</div>
 
+	<div style="margin-left: 550px; margin-top: 70px; ">
+		<input type="radio" name="food" id="food">FOOD
+		&nbsp;&nbsp;&nbsp;<input type="radio" name="restaurant" id="restaurant">RESTAURANT
+	</div>
+
+
 </body>
 
 <!-- <footer>

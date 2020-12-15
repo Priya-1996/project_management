@@ -43,8 +43,9 @@ class SignupController extends Controller
 
         
 
-        Mail::to('deephazra018@gmail.com')->send(new SendingEmail($data));
+        Mail::to('priyahaz444@gmail.com')->send(new SendingEmail($data));
         $req->session()->flash('msg1','Please check your email to activate your account');
+        return redirect('/registration');
         
     }
     public function verifyEmail($token,Request $req)

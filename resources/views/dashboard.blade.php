@@ -9,7 +9,7 @@
 <div class="sidenav">
         <a href="">Dashboard</a>
         <a href="http://127.0.0.1:8000/admindisplay">Userlist</a>
-        <a href="http://127.0.0.1:8000/getownerdata">Restaurant Owner List</a>
+        <a href="http://127.0.0.1:8000/ownerdata">Restaurant Owner List</a>
         <a href="">Action</a>
         <a href="http://127.0.0.1:8000/cuisine">Add Cuisine</a>
         <a href="http://127.0.0.1:8000/modify">Modify Cuisine</a>
