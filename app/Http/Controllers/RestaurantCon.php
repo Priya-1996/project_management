@@ -8,6 +8,8 @@ use App\Models\Cuisinemodel;
 use App\Models\Ownerdata;
 use App\Models\Foodmodel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Ownermail;
 use Illuminate\Support\Str;
 
 class RestaurantCon extends Controller
@@ -81,12 +83,18 @@ class RestaurantCon extends Controller
 
     function owner_login(Request $req)
     {
-        $login=new Customermodel();
-        $email=$req->email;
-        $user=Customermodel::where('email',$email)->get();
-        if(count($user)>0)
+        $login=new Ownerdata();
+        $ran_name=$req->input('username');
+        $ran_password=$req->input('pwd');
+        $session=Ownerdata::where('ran_name',$ran_name)->where('ran_password',$ran_password)->get();
+        if(count($session)>0)
         {
-            return redirect('ownerdashboard');
+            $req->session()->put('user_id',$session[0]->id);
+            $user=$req->session()->put('user_mail',$session[0]->email);
+            return redirect('/ownerdashboard')->with($user);
+        }
+        else{
+            echo "something wrong";
         }
 
     }
@@ -100,7 +108,7 @@ class RestaurantCon extends Controller
     {
         $add=new Foodmodel();
         $add->name=$req->input('foodname');
-        $add->price=$req->input('price');
+        $add->price='Rs.'.$req->input('price');
         if($req->hasfile('image'))
         {
             foreach($req->file('image') as $file)
@@ -117,6 +125,16 @@ class RestaurantCon extends Controller
         // else{
         //     echo "something wrong";
         // }
+    }
+
+    function searchbar(Request $req)
+    {
+        // $search=$req->input('search');
+        // echo $search;
+        $data=new Foodmodel();
+        $name=$req->table;
+        $table=Foodmodel::select('*')->where('name','LIKE','%'.$name.'%')->get();
+        return view('search',['table'=>$table]);
     }
 
 

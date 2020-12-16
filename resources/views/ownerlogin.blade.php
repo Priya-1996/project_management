@@ -15,13 +15,13 @@
   <form method="post" action="/ownerlogin">
   	@csrf
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter username" name="username">
     </div>
-    <!-- <div class="form-group">
+    <div class="form-group">
       <label for="pwd">Password:</label>
       <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-    </div> -->
+    </div>
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>

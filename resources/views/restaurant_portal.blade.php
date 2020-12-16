@@ -3,26 +3,63 @@
 <head>
 	<title>Restaurent Portal</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-	<!-- JS, Popper.js, and jQuery -->
+	
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script
+  src="http://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
 </head>
 
 @include('header')
 
 <body>
+	<div style="margin-left: 550px; margin-top: 200px; ">
+		<input type="radio" name="food" id="food" value="food">FOOD
+		&nbsp;&nbsp;&nbsp;<input type="radio" name="food" id="food" value="restaurant">RESTAURANT
+	</div>
 	<div>
-        <form class="form-inline" action="" style="margin-left: 550px; margin-top: 200px;">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search food/restaurants">
-            <button class="btn btn-success" type="submit">Search</button>
+        <form method="get" class="form-inline" action="/searching" style="margin-left: 520px; margin-top: 50px;">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search food/restaurants" id="search" name="search">
+            <input type="submit" class="btn btn-success" value="search" id="result">
         </form>
+        <div class="container" id="res1" style="margin-left: 520px;"></div>
 	</div>
 
-	<div style="margin-left: 550px; margin-top: 70px; ">
-		<input type="radio" name="food" id="food">FOOD
-		&nbsp;&nbsp;&nbsp;<input type="radio" name="restaurant" id="restaurant">RESTAURANT
-	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#result").click(function(e){
+				e.preventDefault();
+				var select=$("#food").val();
+				if(select=="food")
+				{
+					var search=$("#search").val();
+				    //console.log("food",search);
+					$.ajax({
+					type : "GET",
+					url  : "{{URL('/searching')}}",
+					data : {
+						table:search
+					},
+					success:function(res)
+					{
+						$("#res1").show();
+						$("#res1").html(res);
+					}
+				});
+				}
+				// if(select=="restaurant")
+				// {
+				// 	var search=$("#search").val();
+				// }
+				
+			});
+		});
+	</script>
+
+	
 
 
 </body>

@@ -15,6 +15,8 @@
   src="http://code.jquery.com/jquery-3.5.1.js"
   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
   crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
   
 
@@ -22,7 +24,7 @@
 <body>
 <div class="container" style="margin: auto;">
   <h2 style="color: red;">IF YOU ARE A RESTAURANT OWNER, REGISTER HERE </h2>
-  <form method="post" action="http://127.0.0.1:8000/resowner_reg" style="margin: auto;" enctype="multipart/form-data" onsubmit="return validation()">
+  <form method="post" action="http://127.0.0.1:8000/resowner_reg" style="margin: auto;" enctype="multipart/form-data" onsubmit="return validation()" name="owner">
   	@csrf
     <div class="form-group">
       <label for="image">Restaurant Image:</label>
@@ -101,6 +103,34 @@ $data=DB::table('cuisine')->select('cuisine')->get();
 </div>
 <script type="text/javascript">
 
+  $("form[name='owner']").validate({
+    rules: {
+      // The key name on the left side is the name attribute
+      // of an input field. Validation rules are defined
+      // on the right side
+      image: "required",
+      name: "required",
+      email: {
+        required: true,
+        email: true
+      },
+      add: "required",
+      editor1: "required",
+      cuisine: "required"
+    },
+    messages: {
+      image: "Please enter image",
+      name: "Please enter restaurant name",
+      email: "Please enter a valid email address",
+      add: "Please provide your location from map",
+      editor1: "Please provide description",
+      cuisine: "Please add cuisine"
+    },
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
+
 	var placeSearch, autocomplete;
       var componentForm = {
         street_number: 'short_name',
@@ -161,87 +191,7 @@ $data=DB::table('cuisine')->select('cuisine')->get();
           });
         }
       }
-// function validation()
-// {
-// 	var image=document.getElementById("image").value;
-// 	var name=document.getElementById("name").value;
-// 	var email=document.getElementById("email").value;
-// 	var address=document.getElementById("street_number").value;
-// 	var route=document.getElementById("route").value;
-// 	var city=document.getElementById("locality").value;
-// 	var state=document.getElementById("administrative_area_level_1").value;
-// 	var zip=document.getElementById("postal_code").value;
-// 	var country=document.getElementById("country").value;
-// 	var about=document.getElementById("myeditor").value;
-// 	var cuisine=document.getElementById("food").value;
-// 	    if(image=="")
-// 		{
-// 			document.getElementById("i").innerHTML="Please insert image";
-// 	    	document.getElementById("i").style.color="red";
-// 	    	return false;
-// 		}
-// 		if(name=="")
-// 		{
-// 			document.getElementById("n").innerHTML="Please enter restaurent name";
-// 	    	document.getElementById("n").style.color="red";
-// 	    	return false;
-// 		}
-		// if(email=="")
-		// {
-		// 	document.getElementById("emid").innerHTML="Please enter email id";
-	 //    	document.getElementById("emid").style.color="red";
-	 //    	return false;
-		// }
-// 		if(address=="")
-// 		{
-// 			document.getElementById("add").innerHTML="Please add your adreess";
-// 	    	document.getElementById("add").style.color="red";
-// 	    	return false;
-// 		}
-// 		if(route=="")
-// 		{
-// 			document.getElementById("street_no").innerHTML="Please add your adreess";
-// 	    	document.getElementById("street_no").style.color="red";
-// 	    	return false;
-// 		}
-// 		if(city=="")
-// 		{
-// 			document.getElementById("city").innerHTML="Please add your adreess";
-// 	    	document.getElementById("city").style.color="red";
-// 	    	return false;
-// 		}
-// 		if(state=="")
-// 		{
-// 			document.getElementById("state").innerHTML="Please add your adreess";
-// 	    	document.getElementById("state").style.color="red";
-// 	    	return false;
-// 		}
-// 		if(zip=="")
-// 		{
-// 			document.getElementById("zip").innerHTML="Please add your adreess";
-// 	    	document.getElementById("zip").style.color="red";
-// 	    	return false;
-// 		}
-// 		if(country=="")
-// 		{
-// 			document.getElementById("cntry").innerHTML="Please add your adreess";
-// 	    	document.getElementById("cntry").style.color="red";
-// 	    	return false;
-// 		}
-// 		if(about=="")
-// 		{
-// 			document.getElementById("ed").innerHTML="Please add description";
-// 	    	document.getElementById("ed").style.color="red";
-// 	    	return false;
-// 		}
-// 		if(cuisine=="")
-// 		{
-// 			document.getElementById("c").innerHTML="Please add at laest one cuisine";
-// 	    	document.getElementById("c").style.color="red";
-// 	    	return false;
-// 		}
-
-// }      
+      
    
     CKEDITOR.replace('editor1');
     

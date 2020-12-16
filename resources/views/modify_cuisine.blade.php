@@ -20,12 +20,12 @@
 </head>
 <body>
 <div class="sidenav">
-        <a href="http://127.0.0.1:8000/dashboard">Dashboard</a>
-        <a href="http://127.0.0.1:8000/admindisplay">Userlist</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/admindisplay">Userlist</a>
         <a href="">Action</a>
-        <a href="http://127.0.0.1:8000/cuisine">Add Cuisine</a>
+        <a href="/cuisine">Add Cuisine</a>
         <a href="">Modify Cuisine</a>
-        <a href="http://127.0.0.1:8000/logout">Logout</a>
+        <a href="/logout">Logout</a>
     </div>
     <div class="main">
     	<center><h3 style="color: green;">MODIFY CUISINE HERE</h3></center>

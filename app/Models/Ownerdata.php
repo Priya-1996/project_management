@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ownerdata extends Model
 {
+	protected $guarded = [];
     use HasFactory;
     public $table='owner_data';
     public $timestamps=false;

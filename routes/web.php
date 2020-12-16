@@ -94,12 +94,12 @@ Route::post('/dataupdate','App\Http\Controllers\AdminCon@dataupdate');
 
 Route::get('datadelete/{id}','App\Http\Controllers\AdminCon@datadelete')->name('data.delete');
 
-Route::get('/adminlogout',function(){
+Route::get('/ownerlogout',function(){
 	if(session()->has('user_id'))
 	{
 		session()->forget('user_id');
 	}
-	return redirect('adminlogin');
+	return redirect('owner');
 });
 });
 
@@ -134,8 +134,16 @@ Route::get('/owner','App\Http\Controllers\RestaurantCon@owner');
 
 Route::post('/ownerlogin','App\Http\Controllers\RestaurantCon@owner_login');
 
+Route::group(['middleware'=>['ownerAuth']],function(){
+
 Route::get('/ownerdashboard','App\Http\Controllers\RestaurantCon@owner_dashboard');
 
 Route::get('/food','App\Http\Controllers\RestaurantCon@managefood');
 
+
+
+});
+
 Route::post('/addfood','App\Http\Controllers\RestaurantCon@addfood');
+
+Route::get('/searching','App\Http\Controllers\RestaurantCon@searchbar');

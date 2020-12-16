@@ -8,9 +8,9 @@
 <p>{{ $data['body'] }}</p>
 <p>Welcome {{ $data['email'] }}</p>
 <p><a href="{{ route('verify',$data['ran_name']) }}">
-	{{ route('verify',$data['ran_name']) }}</a>
+	{{ $data['ran_name'] }}</a>
 	<a href="{{ route('verify',$data['ran_password']) }}">
-	{{ route('verify',$data['ran_password']) }}</a><br>
+	{{ $data['ran_password'] }}</a><br>
 	Use this username and password to login
 </body>
 </html>

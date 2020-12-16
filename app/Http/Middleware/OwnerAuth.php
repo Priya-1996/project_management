@@ -3,10 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Session;
 use Illuminate\Http\Request;
 
-class AdminAuth
+class OwnerAuth
 {
     /**
      * Handle an incoming request.
@@ -19,13 +18,8 @@ class AdminAuth
     {
         if(!session()->has('user_id'))
         {
-            return redirect('adminlogin');
+            return redirect('owner');
         }
-        // $path=$request->path();
-        // if(($path=="adminlogin") && (Session::get('user_id')))
-        // {
-        //     return redirect('dashboard');
-        // }
         return $next($request);
     }
 }
